@@ -1,10 +1,9 @@
-version: '3'
+sudo: required
+services:
+  - docker
 
-services: 
-  redis-server1:
-    image: 'redis'
+before_install:
+  - docker build -t sakshi75/docker-react -f Dockerfile.dev .
 
-  node-app1:
-    build: .
-    ports:
-     - "8080:8080"
+script:
+  - docker run sakshi75/docker-react npm run test -- --coverage
